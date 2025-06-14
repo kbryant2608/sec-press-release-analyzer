@@ -22,8 +22,9 @@ def extract_exhibit_99_1(cik: str, accession_number: str) -> Optional[str]:
     resp.raise_for_status()
     files = resp.json().get("directory", {}).get("item", [])
 
-    # Look for a filename containing "exhibit" and "99"
-    pattern = re.compile(r"exhibit.*99.*\.htm", re.IGNORECASE)
+    # Look for any “ex…” exhibit or R1.htm (common press-release container)
+    pattern = re.compile(r"(?:ex\d[-_.]\d|r1)\.htm$", re.IGNORECASE)
+
     target = next((f["name"] for f in files if pattern.search(f["name"])), None)
     if not target:
         return None
