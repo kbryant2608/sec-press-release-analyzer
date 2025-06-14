@@ -1,0 +1,13 @@
+
+requests>=2.28
+
+pandas>=1.5
+
+beautifulsoup4
+
+lxml
+
+nltk
+
+scikit-learn
+
